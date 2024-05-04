@@ -17,25 +17,25 @@ pipeline {
         //         }
         //     }
         // }
-         stage("docker build"){
-             steps{
-        sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:v1.$BUILD_ID'
-        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:latest'
-             }
-         }
-         stage("push Image: DOCKERHUB"){
-             steps{
-                 withCredentials([string(credentialsId: 'dockerhub', variable: 'docker_passwd')]) {
-                 sh "docker login -u gita -p ${docker_passwd}"
-                sh 'docker image push gita/$JOB_NAME:v1.$BUILD_ID'
-                sh 'docker image push gita/$JOB_NAME:latest'
-               //A number of images will get stored into our jenkins server so need to remove prev build images
-                //local images,taged images & latest images all delete 
-              sh 'docker image rm $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:latest'
-              }
-             }
-         }
+        //  stage("docker build"){
+        //      steps{
+        // sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+        // sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:v1.$BUILD_ID'
+        // sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:latest'
+        //      }
+        //  }
+        //  stage("push Image: DOCKERHUB"){
+        //      steps{
+        //          withCredentials([string(credentialsId: 'dockerhub', variable: 'docker_passwd')]) {
+        //          sh "docker login -u gita -p ${docker_passwd}"
+        //         sh 'docker image push gita/$JOB_NAME:v1.$BUILD_ID'
+        //         sh 'docker image push gita/$JOB_NAME:latest'
+        //        //A number of images will get stored into our jenkins server so need to remove prev build images
+        //         //local images,taged images & latest images all delete 
+        //       sh 'docker image rm $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:latest'
+        //       }
+        //      }
+        //  }
     //        stage("Docker Container Deployment"){
     //             steps {
     //     // def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo vikashashoke/scripted-pipeline-demo:latest'
