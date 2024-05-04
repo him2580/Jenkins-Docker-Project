@@ -36,23 +36,22 @@ pipeline {
               }
              }
          }
-           stage("Docker Container Deployment"){
+          stage("Docker Container Deployment") {
                 steps {
-                    def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo gita/deployment:latest'
-                    def docker_rmv_container = 'docker rmi -f gita/deployment'
-                    def docker_rmi = 'docker rmi -f gita/deployment'
-        // container deployment need to be done on remote host server DOCKER-Host so ssh-Agent plugin required in jenkins
-                   sshagent(['sshagent']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_rmv_container}"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_rmi}"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_run}"
-    //Once sucess try with Docker-Host_IP:Port
-    //Once after Changing the Dockerfile it says port already allocated to prev container whom we didn't yet deleted
-    // therefor ist delete the prev container so that port will be free then try creating a new 
-    //But still it'll not update because latest image is already in server it's not going to dockerHub to pull latest commmit so need to remove images also
-       }
-                }
-             }
+                    script {
+                        def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo gita/deployment:latest'
+                        def docker_rmv_container = 'docker rmi -f gita/deployment'
+                        def docker_rmi = 'docker rmi -f gita/deployment'
+
+            // Container deployment need to be done on remote host server DOCKER-Host so ssh-Agent plugin required in Jenkins
+            sshagent(['sshagent']) {
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_rmv_container}"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_rmi}"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_run}"
+            }
+        }
+    }
+}
     
           
         /* stage("Building Docker Image"){
