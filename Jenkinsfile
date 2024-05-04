@@ -17,13 +17,13 @@ pipeline {
         //         }
         //     }
         // }
-        //  stage("docker build"){
-        //      steps{
-        // sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-        // sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:v1.$BUILD_ID'
-        // sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:latest'
-        //      }
-        //  }
+         stage("docker build"){
+             steps{
+                 sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:v1.$BUILD_ID'
+                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID gita/$JOB_NAME:latest'
+             }
+         }
         //  stage("push Image: DOCKERHUB"){
         //      steps{
         //          withCredentials([string(credentialsId: 'dockerhub', variable: 'docker_passwd')]) {
