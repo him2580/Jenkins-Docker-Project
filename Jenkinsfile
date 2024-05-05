@@ -29,21 +29,21 @@ pipeline {
               }
              }
          }
-//           stage("Docker Container Deployment") {
-//                 steps {
-//                     script {
-//                         def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo gita/deployment:latest'
-//                         def docker_rmv_container = 'docker rmi -f gita/deployment'
-//                         def docker_rmi = 'docker rmi -f gita/deployment'
+          stage("Docker Container Deployment") {
+                steps {
+                    script {
+                        def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo gita/deployment:latest'
+                        def docker_rmv_container = 'docker rmi -f gita/deployment'
+                        def docker_rmi = 'docker rmi -f gita/deployment'
 
-//             sshagent(['sshagent']) {
-//                 sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_rmv_container}"
-//                 sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_rmi}"
-//                 sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.229 ${docker_run}"
-//             }
-//         }
-//     }
-// }
+            sshagent(['sshagent']) {
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.189 ${docker_rmv_container}"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.189 ${docker_rmi}"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.189 ${docker_run}"
+            }
+        }
+    }
+}
     
     
     }
