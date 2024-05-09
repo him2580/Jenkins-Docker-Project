@@ -32,9 +32,9 @@ pipeline {
           stage("Docker Container Deployment") {
                 steps {
                     script {
-                        def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo himanshu3010/deployment:latest'
+                        def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo himanshu3010/docker:latest'
                         def docker_rmv_container = 'docker rmi -f scripted-pipeline-demo'
-                        def docker_rmi = 'docker rmi -f himanshu3010/deployment'
+                        def docker_rmi = 'docker rmi -f himanshu3010/docker'
 
             sshagent(['sshagent1']) {
                 sh "ssh -o StrictHostKeyChecking=no ubuntu@65.0.103.159 ${docker_rmv_container}"
