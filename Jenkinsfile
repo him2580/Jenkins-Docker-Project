@@ -36,10 +36,10 @@ pipeline {
                         def docker_rmv_container = 'docker rmi -f himanshu3010/deployment'
                         def docker_rmi = 'docker rmi -f himanshu3010/deployment'
 
-            sshagent(['sshagent']) {
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.189 ${docker_rmv_container}"
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.189 ${docker_rmi}"
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.189 ${docker_run}"
+            sshagent(['sshagent1']) {
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@65.0.103.159 ${docker_rmv_container}"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@65.0.103.159 ${docker_rmi}"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@65.0.103.159 ${docker_run}"
             }
         }
     }
