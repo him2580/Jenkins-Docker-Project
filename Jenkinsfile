@@ -13,8 +13,8 @@ pipeline {
          stage("docker build"){
              steps{
                  sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID himanshu3010/$JOB_NAME:v1.$BUILD_ID'
-                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID himanshu3010/$JOB_NAME:latest'
+                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID himanshu/$JOB_NAME:v1.$BUILD_ID'
+                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID himanshu/$JOB_NAME:latest'
              }
          }
          stage("push Image: DOCKERHUB"){
