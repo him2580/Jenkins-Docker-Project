@@ -33,7 +33,7 @@ pipeline {
                 steps {
                     script {
                         def docker_run = 'docker run -p 9000:80 -d --name scripted-pipeline-demo himanshu3010/deployment:latest'
-                        def docker_rmv_container = 'docker rmi -f himanshu3010/deployment'
+                        def docker_rmv_container = 'docker rmi -f scripted-pipeline-demo'
                         def docker_rmi = 'docker rmi -f himanshu3010/deployment'
 
             sshagent(['sshagent1']) {
